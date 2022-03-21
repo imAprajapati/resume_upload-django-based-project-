@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load myfillter %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Google font CSS link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+        
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Condidate</title>
+    <style>
+        .shadow{
+            box-shadow:0px 16px 32px 0px rgba(0,0,0,0.3);
+        }
+        span{
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .custom{
+            box-shadow:0px 12px 24px 0px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4 class='alert-danger text-center p-4 custom'>Candidate Details</h4>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 p-5 shadow">
+                <h3 class="text-center"><u>Resume</u></h3>
+                <p class="float-right">Application No: {{condidate.id}}</p>
+                <img src="{{condidate.profile_image.url}}" alt="" class="img-fuild float-right mt-5 img-thumbnail mt-2" width="150" height="150">
+                <p>Name: <span>{{condidate.name|capfirst}}</span></p>
+                <p>Date of Birth: <span>{{condidate.dob}}</span></p>
+                <p>Gender: <span>{{condidate.gender}}</span></p>
+                <p>Address: <span>{{condidate.locality}}, {{condidate.city}} - {{condidate.pin}}</span></p>
+                <p>Mobile: <span>{{condidate.mobile}}</span></p>
+                <p>Email: <span>{{condidate.email}}</span></p>
+                <p>Preferred Job Cities: <span>{{condidate.job_city|remove_spcial:"[]'"}}</span></p>
+                <p>Attachement: <a href="{{condidate.my_file.url}}">Download File</a></p>
+                <div class="text-center">
+                    <a href="" class="btn btn-outline-warning">Edit</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-success">Back To Home</a>
+                    <a href="{% url 'delete' condidate.id%}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+</body>
+</html>

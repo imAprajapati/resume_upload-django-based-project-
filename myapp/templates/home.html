@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap css link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+
+    <!-- Google font css link -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+    
+
+<!-- Custom CSS link-->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    
+    <title>Home</title>
+    <style>
+        form{
+            box-shadow:0px 16px 32px 0px rgba(0,0,0,0.3);
+            border-radius:10px;
+        
+        }
+        .shadow{
+            box-shadow:0px 16px 32px 0px rgba(0,0,0,0.3);
+            border-radius:10px;
+        }
+        .custom{
+            box-shadow:0px 12px 24px 0px rgba(0,0,0,0.3);
+            text-shadow:0px 6px 12px 0px rgba(0,0,0,0.3);
+        }
+        label,h4,span{
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        ::placeholder{
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        a['title'~='show']{
+            font-family: 'Nunito Sans', sans-serif;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    
+  <div class="container mb-5">
+      <h4 class='alert-danger text-center p-4 custom'>Resume Upload</h4>
+      <div class="row">
+          <div class="col-sm-8">
+              <form action="" method="post" enctype="multipart/form-data" class="p-5">
+                  {% csrf_token %}
+                  {% for fm in form %}
+                  <div class="form-group mb-3">
+                      <span>{{fm.label_tag}}</span>{{fm}} <small class='text-danger'>{{fm.errors|striptags}}</small>
+                  </div>
+                  {% endfor %}
+                  <input type="submit" value='Submit' class="btn btn-primary">
+                  {% if form.non_field_errors %}
+                  {% for erroe in form.non_field_errors %}
+                  <p class="alert alert-danger my-3">{{error}}</p>
+                  {% endfor %}
+                  {% endif %}
+              </form>
+          </div>
+          <div class="col-sm-4 shadow">
+              <h4 class='pt-3'>List of Candidate</h4>
+              {% for condidate in condidates %}
+              <span>{{condidate.id}}</span> : <a href="{% url 'condidate' condidate.id%}" title="show candidate details"><span>{{condidate.name|capfirst}}</span></a>
+              <hr>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+
+
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+    <script>
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
+    </script>
+</body>
+</html>

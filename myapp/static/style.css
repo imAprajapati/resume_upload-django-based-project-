@@ -1,0 +1,12 @@
+#id_job_city,#id_gender{
+    display: inline-flex;
+}
+#id_gender{
+    margin-left: 2px;
+}
+#id_gender div{
+    margin-right: 10px;
+}
+#id_job_city div{
+    margin-right: 10px;
+}
